@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Exercise03
 {
+    public delegate double Sum(double n, Func<double, double> method);
+
     class Program
     {
         static void Main(string[] args)
         {
-            Func<double, Func<double, double>, double> Sum = (x, method) =>
+            Sum sumResult = (x, method) =>
             {
                 var sum = 0.0;
 
@@ -24,8 +26,8 @@ namespace Exercise03
 
             var n = 3;
 
-            Console.WriteLine(Sum(n, x => Math.Pow(x, x)));
-            Console.WriteLine(Sum(n, x => x * (x + 1)));
+            Console.WriteLine(sumResult(n, x => Math.Pow(x, x)));
+            Console.WriteLine(sumResult(n, x => x * (x + 1)));
 
             Console.ReadKey();
         }

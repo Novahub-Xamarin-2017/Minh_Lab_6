@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Exercise01
 {
+    public delegate List<int> ListOfPrimeSmallerX(int i);
+
     class Program
     {
         static void Main(string[] args)
         {
-            Func<int, List<int>> ListOfPrimeSmallerX = (x) =>
+            ListOfPrimeSmallerX listOfPrimeSmallerX = (x) =>
             {
                 var list = new List<int>();
 
@@ -25,29 +27,11 @@ namespace Exercise01
                 return list;
             };
 
-            var newList = ListOfPrimeSmallerX(100);
+            var newList = listOfPrimeSmallerX(100);
 
             newList.ForEach(Console.WriteLine);
 
             Console.ReadKey();
-        }
-    }
-
-    public static class Extention
-    {
-        public static bool IsPrime(this int x)
-        {
-            var n = Math.Sqrt(x);
-
-            for (int i = 2; i <= n; i++)
-            {
-                if (x % i == 0)
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
     }
 }

@@ -13,22 +13,23 @@ namespace Exercise04
         {
             var pathFolder = @"C:\Users\huynh\OneDrive";
             var newList = FilterFile(pathFolder, x =>x.EndsWith(".txt"));
+
             newList.ForEach(Console.WriteLine);
 
             Console.ReadKey();
         }
 
-        public static List<string> FilterFile(string path, Func<string, bool> endWith)
+        public static List<string> FilterFile(string path, Predicate<string> filter)
         {
             var files = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
 
             var list = new List<string>();
 
-            foreach (var i in files)
+            foreach (var file in files)
             {
-                if (endWith(i))
+                if (filter(file))
                 {
-                    list.Add(i);
+                    list.Add(file);
                 }
             }
 

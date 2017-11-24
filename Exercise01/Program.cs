@@ -6,28 +6,26 @@ using System.Threading.Tasks;
 
 namespace Exercise01
 {
-    public delegate List<int> ListOfPrimeSmallerX(int i);
-
     class Program
     {
+        private static List<int> GetAllPrimeNumbersSmallerThan(int x)
+        {
+            var list = new List<int>();
+
+            for (int i = 2; i < x; i++)
+            {
+                if (i.IsPrime())
+                {
+                    list.Add(i);
+                }
+            }
+
+            return list;
+        }
+
         static void Main(string[] args)
         {
-            ListOfPrimeSmallerX listOfPrimeSmallerX = (x) =>
-            {
-                var list = new List<int>();
-
-                for (int i = 2; i <= x - 1; i++)
-                {
-                    if (i.IsPrime())
-                    {
-                        list.Add(i);
-                    }
-                }
-
-                return list;
-            };
-
-            var newList = listOfPrimeSmallerX(100);
+            var newList = GetAllPrimeNumbersSmallerThan(100);
 
             newList.ForEach(Console.WriteLine);
 
